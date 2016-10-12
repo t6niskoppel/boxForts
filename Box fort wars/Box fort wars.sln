@@ -1,0 +1,35 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{C5EB9D46-A449-BB6F-6507-05DA2E71F094}") = "Box fort wars", "Assembly-CSharp-firstpass.csproj", "{842DE128-74C2-84C5-3EBB-29B3BF8DEB31}"
+EndProject
+Project("{C5EB9D46-A449-BB6F-6507-05DA2E71F094}") = "Box fort wars", "Assembly-CSharp.csproj", "{B92EC1D9-2863-3C96-9EB2-AE82E42B34D2}"
+EndProject
+Project("{C5EB9D46-A449-BB6F-6507-05DA2E71F094}") = "Box fort wars", "Assembly-CSharp-Editor.csproj", "{CBB19F9A-F089-92EF-B64C-5A2FC2938248}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{842DE128-74C2-84C5-3EBB-29B3BF8DEB31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{842DE128-74C2-84C5-3EBB-29B3BF8DEB31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{842DE128-74C2-84C5-3EBB-29B3BF8DEB31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{842DE128-74C2-84C5-3EBB-29B3BF8DEB31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B92EC1D9-2863-3C96-9EB2-AE82E42B34D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B92EC1D9-2863-3C96-9EB2-AE82E42B34D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B92EC1D9-2863-3C96-9EB2-AE82E42B34D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B92EC1D9-2863-3C96-9EB2-AE82E42B34D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBB19F9A-F089-92EF-B64C-5A2FC2938248}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBB19F9A-F089-92EF-B64C-5A2FC2938248}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBB19F9A-F089-92EF-B64C-5A2FC2938248}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBB19F9A-F089-92EF-B64C-5A2FC2938248}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
