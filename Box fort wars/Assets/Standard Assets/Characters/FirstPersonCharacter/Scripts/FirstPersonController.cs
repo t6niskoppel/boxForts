@@ -278,9 +278,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		}
 
 		void Fire(){
-			missileSpawn = Camera.main.gameObject.transform;
+			missileSpawn = GameObject.Find ("missileSpawnPoint").gameObject.transform;
 			float shotForce = 10000f;
-			GameObject missile = (GameObject) Instantiate(missilePrefab, missileSpawn.position, missileSpawn.rotation);
+			GameObject missile = (GameObject) Instantiate(missilePrefab, missileSpawn.position+new Vector3(0,0,1), missileSpawn.rotation);
 			missile.GetComponent<Rigidbody> ().AddForce (m_Camera.transform.forward*shotForce);
 			shot_fired = true;
 		}
