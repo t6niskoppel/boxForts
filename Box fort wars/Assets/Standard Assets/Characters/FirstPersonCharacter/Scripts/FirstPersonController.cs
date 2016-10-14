@@ -48,6 +48,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		private bool shot_fired;
 		private float reload_timer;
 		private float reload_time = 1f;
+		//private MonoBehaviour gameController;
 
 		// Use this for initialization
 		private void Start()
@@ -64,6 +65,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			m_MouseLook.Init(transform , m_Camera.transform);
 			shot_fired = false;
 			reload_timer = 0f;
+			//gameController = GameObject.Find ("GameController").GetComponent<MonoBehaviour> ();
 		}
 
 
@@ -278,9 +280,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		}
 
 		void Fire(){
-			missileSpawn = GameObject.Find ("missileSpawnPoint").gameObject.transform;
-			float shotForce = 10000f;
-			GameObject missile = (GameObject) Instantiate(missilePrefab, missileSpawn.position+new Vector3(0,0,1), missileSpawn.rotation);
+			String playerNr = "";
+			if (GameObject.Find ("Player 1").GetComponent<MonoBehaviour> ().enabled) {
+				playerNr = "1";
+			} else {
+				playerNr = "2";
+			}
+			missileSpawn = GameObject.Find ("missileSpawnPoint"+playerNr).gameObject.transform;
+			float shotForce = 20000f;
+			GameObject missile = (GameObject) Instantiate(missilePrefab, missileSpawn.position, missileSpawn.rotation);
 			missile.GetComponent<Rigidbody> ().AddForce (m_Camera.transform.forward*shotForce);
 			shot_fired = true;
 		}

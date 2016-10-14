@@ -3,8 +3,8 @@ using System.Collections;
 
 public class missile : MonoBehaviour {
 
-	public float radius = 300f;
-	public float power = 50000000000f;
+	public float radius;
+	public float power;
 	private bool exploded = false;
 
 	// Use this for initialization
