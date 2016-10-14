@@ -17,7 +17,7 @@ public class fortBuilder : MonoBehaviour {
 		}
 
 		for (int i = 1; i < 7; i++) {
-			materials.Add((Material) Resources.Load("Materials/Cube "+ i,typeof(Material)));
+			materials.Add((Material) Resources.Load("Materials/Cube"+ i,typeof(Material)));
 		}
 
 		//buildWall (0, 0, 0, 1, 2, 25);
@@ -84,23 +84,22 @@ public class fortBuilder : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		/* ei tööta nii see asi:P
 		if (Input.GetKey (KeyCode.T)) {
 			foreach (Material m in materials) {
-				m.color = Color.blue;
+				m.color = Color.grey;
 			}
 
-			materialSelector ().color = Color.blue;
-		}*/
+			materialSelector ().color = Color.white;
+		}
 
 	}
 
 	Material materialSelector(){
-		return materials [Random.Range (1, 6)];
+		return materials [Random.Range (0, 6)];
 	}
 
 	GameObject cubeSelector(){
-		return cubes [Random.Range (1, 6)];
+		return cubes [Random.Range (0, 6)];
 	}
 
 	//create planks - moves towards z axis

@@ -28,7 +28,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		[SerializeField] private AudioClip[] m_FootstepSounds;    // an array of footstep sounds that will be randomly selected from.
 		[SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
 		[SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
-
+		[SerializeField] private float shotForce;
 		[SerializeField] private GameObject missilePrefab;
 
 		private Camera m_Camera;
@@ -48,6 +48,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		private bool shot_fired;
 		private float reload_timer;
 		private float reload_time = 1f;
+		private float shotPower = 0;
 		//private MonoBehaviour gameController;
 
 		// Use this for initialization
@@ -77,6 +78,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 				if (reload_timer >= reload_time) {
 					shot_fired = false;
+					reload_timer = 0;
 				}
 			}
 			RotateView();
@@ -114,8 +116,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		{
 
 			//Shooting
-			if (Input.GetMouseButtonDown(0) && !shot_fired) {
+			if (Input.GetMouseButton(0) && !shot_fired) {
+				if (shotPower < 1) {
+					shotPower += Time.deltaTime/3;
+				}
+			}
+			if (Input.GetMouseButtonUp (0) && !shot_fired) {
 				Fire ();
+				shotPower = 0;
 			}
 			float speed;
 			GetInput(out speed);
@@ -287,9 +295,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				playerNr = "2";
 			}
 			missileSpawn = GameObject.Find ("missileSpawnPoint"+playerNr).gameObject.transform;
-			float shotForce = 20000f;
+
 			GameObject missile = (GameObject) Instantiate(missilePrefab, missileSpawn.position, missileSpawn.rotation);
-			missile.GetComponent<Rigidbody> ().AddForce (m_Camera.transform.forward*shotForce);
+			missile.GetComponent<Rigidbody> ().AddForce (m_Camera.transform.forward*shotForce*shotPower);
 			shot_fired = true;
 		}
 
