@@ -14,11 +14,17 @@ public class missile : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (this.transform.position.y < -30) {
+			Destroy (this.gameObject);
+		}
 	}
 
 	void OnCollisionEnter(Collision col){
+		if (col.gameObject.tag == "Water") {
+			Physics.IgnoreCollision (this.gameObject.GetComponent<Collider> (), col.gameObject.GetComponent<Collider> ());
+		}
 		if (!exploded) {
+			//võtan mingis raadiuses kinematicu maha
 			Vector3 explosionPos = this.gameObject.transform.position;
 			Collider[] kinematicColliders = Physics.OverlapSphere (explosionPos, radius * 2);
 			foreach (Collider hit in kinematicColliders) {
@@ -34,19 +40,19 @@ public class missile : MonoBehaviour {
 					}
 				}
 			}
-
-			if (col.gameObject.name.StartsWith ("Cube 4")) {
+			//Kui visati helendavat kasti -> big explosion
+			if (col.gameObject.GetComponent<Renderer>().material.color == Color.white) {
 				Collider[] hitColliders = Physics.OverlapSphere (explosionPos, radius);
 				foreach (Collider hit in hitColliders) {
 					if (hit.gameObject.name.StartsWith ("Cube")) {
 						Rigidbody rb = hit.GetComponent<Rigidbody> ();
 						if (rb != null) {
 							rb.AddExplosionForce (power, explosionPos, radius, 0f);
-							//Destroy (hit.gameObject, 3f);
-						}
+							}
+						//Destroy (this.gameObject);
 					}
 				}
-			} else {
+			} else {//Kui visati tavalist kasti
 				Collider[] hitColliders = Physics.OverlapSphere (explosionPos, radius);
 				foreach (Collider hit in hitColliders) {
 					if (hit.gameObject.name.StartsWith ("Cube")) {
@@ -55,7 +61,7 @@ public class missile : MonoBehaviour {
 							rb.AddExplosionForce (power / 10f, explosionPos, radius, 0f);
 						}
 		
-						Destroy (this.gameObject, 2f);
+						//Destroy (this.gameObject);
 					}
 				}
 			}

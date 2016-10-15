@@ -118,7 +118,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			//Shooting
 			if (Input.GetMouseButton(0) && !shot_fired) {
 				if (shotPower < 1) {
-					shotPower += Time.deltaTime/3;
+					shotPower += Time.deltaTime/1.5f;
 				}
 			}
 			if (Input.GetMouseButtonUp (0) && !shot_fired) {
