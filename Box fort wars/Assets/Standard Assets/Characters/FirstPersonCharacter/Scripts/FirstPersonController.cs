@@ -50,6 +50,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		private float reload_timer;
 		private float reload_time = 1f;
 		private float shotPower = 0;
+		private int shotCount = 0;
+		private int shotNumber = 2;
+		private float endTimer = 0;
+		private float endTime = 8;
+
 		//private MonoBehaviour gameController;
 
 		// Use this for initialization
@@ -81,6 +86,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
 					shot_fired = false;
 					reload_timer = 0;
 				}
+			}
+			if(shotCount>=shotNumber){
+				shot_fired = true;
+				endTimer += Time.deltaTime;
+			}
+			if (endTimer >= endTime) {
+				shotCount = 0;
+				endTimer = 0;
+				gameController.SendMessage ("SwitchPlayer");
 			}
 			RotateView();
 			// the jump state needs to read here to make sure it is not missed
@@ -303,6 +317,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			GameObject missile = (GameObject) Instantiate(missilePrefab, missileSpawn.position, missileSpawn.rotation);
 			missile.GetComponent<Rigidbody> ().AddForce (m_Camera.transform.forward*shotForce*shotPower);
 			shot_fired = true;
+			shotCount += 1;
 		}
 
 	}

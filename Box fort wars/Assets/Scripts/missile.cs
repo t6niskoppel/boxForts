@@ -60,7 +60,7 @@ public class missile : MonoBehaviour {
 					if (hit.gameObject.name.StartsWith ("Cube")) {
 						Rigidbody rb = hit.GetComponent<Rigidbody> ();
 						if (rb != null) {
-							rb.AddExplosionForce (power / 10f, explosionPos, radius, 0f);
+							rb.AddExplosionForce (power / 5f, explosionPos, radius, 0f);
 						}
 		
 						//Destroy (this.gameObject);
