@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class gameController : MonoBehaviour {
 	public GameObject player1;
 	public GameObject player2;
+	public GameObject fortBuilder;
+	public Slider powerSlider;
 	private MonoBehaviour p1controller;
 	private MonoBehaviour p2controller;
 	public static int enabledPlayer = 1;
@@ -21,6 +24,7 @@ public class gameController : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Tab)) {
 			SwitchPlayer ();
 		}
+
 	}
 
 	void SwitchPlayer(){
@@ -41,5 +45,13 @@ public class gameController : MonoBehaviour {
 
 	public int getEnabledPlayer(){
 		return enabledPlayer;
+	}
+
+	public void setPowerSlider(float f){
+		powerSlider.value = f;
+	}
+
+	public void switchColor(){
+		fortBuilder.SendMessage("switchColor");
 	}
 }

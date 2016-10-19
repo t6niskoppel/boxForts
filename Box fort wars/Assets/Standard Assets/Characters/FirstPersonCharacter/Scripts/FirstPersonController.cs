@@ -30,6 +30,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		[SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
 		[SerializeField] private float shotForce;
 		[SerializeField] private GameObject missilePrefab;
+		[SerializeField] private GameObject gameController;
 
 		private Camera m_Camera;
 		private bool m_Jump;
@@ -66,7 +67,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			m_MouseLook.Init(transform , m_Camera.transform);
 			shot_fired = false;
 			reload_timer = 0f;
-			//gameController = GameObject.Find ("GameController").GetComponent<MonoBehaviour> ();
+			gameController = GameObject.Find ("GameController");
 		}
 
 
@@ -118,13 +119,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			//Shooting
 			if (Input.GetMouseButton(0) && !shot_fired) {
 				if (shotPower < 1) {
-					shotPower += Time.deltaTime/1.5f;
+					shotPower += Time.deltaTime/2.5f;
+					gameController.SendMessage ("setPowerSlider", shotPower);
 				}
 			}
 			if (Input.GetMouseButtonUp (0) && !shot_fired) {
 				Fire ();
 				shotPower = 0;
+				gameController.SendMessage ("setPowerSlider", shotPower);
 			}
+
 			float speed;
 			GetInput(out speed);
 			// always move along the camera forward as it is the direction that it being aimed at

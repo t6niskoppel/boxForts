@@ -3,19 +3,21 @@ using System.Collections;
 
 public class missile : MonoBehaviour {
 
+	private GameObject gameController;
 	public float radius;
 	public float power;
 	private bool exploded = false;
 
 	// Use this for initialization
 	void Start () {
-	
+		gameController = GameObject.Find ("GameController").gameObject;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (this.transform.position.y < -30) {
 			Destroy (this.gameObject);
+			gameController.SendMessage ("switchColor");
 		}
 	}
 
