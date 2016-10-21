@@ -164,7 +164,21 @@ public class fortBuilder : MonoBehaviour {
 		foreach (Material m in materials) {
 				m.color = Color.grey;
 			}
-		materialSelector ().color = Color.white;
+
+		Material mat = materialSelector ();
+		if(mat.name.EndsWith("1")){
+			mat.color = new Color (127f/256f, 22f/256f, 55f/256);
+		}else if(mat.name.EndsWith("2")){
+			mat.color = new Color (4f/256, 120f/256, 120f/256);
+		}else if(mat.name.EndsWith("3")){
+			mat.color = new Color (255f/256, 183f/256, 51f/256);
+		}else if(mat.name.EndsWith("4")){
+			mat.color = new Color (245f/256, 115f/256, 54f/256);
+		}else if(mat.name.EndsWith("5")){
+			mat.color = new Color (194f/256, 33f/256, 33f/256);
+		}else{
+			mat.color = new Color (191f/256, 187f/256, 17f/256);
+		}
 	}
 
 	private void buildFort(float x, float y, float z, GameObject fort){

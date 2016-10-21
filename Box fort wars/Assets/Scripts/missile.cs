@@ -3,14 +3,14 @@ using System.Collections;
 
 public class missile : MonoBehaviour {
 
-	private GameObject gameController;
+	private gameController gameController;
 	public float radius;
 	public float power;
 	private bool exploded = false;
 
 	// Use this for initialization
 	void Start () {
-		gameController = GameObject.Find ("GameController").gameObject;
+		gameController = GameObject.Find ("GameController").GetComponent<gameController> ();
 	}
 	
 	// Update is called once per frame
@@ -43,13 +43,13 @@ public class missile : MonoBehaviour {
 				}
 			}
 			//Kui visati helendavat kasti -> big explosion
-			if (col.gameObject.GetComponent<Renderer>().material.color == Color.white) {
+			if (!col.gameObject.GetComponent<Renderer>().material.color.Equals(Color.gray)&&col.gameObject.name.StartsWith("Cube")) {
 				Collider[] hitColliders = Physics.OverlapSphere (explosionPos, radius);
 				foreach (Collider hit in hitColliders) {
 					if (hit.gameObject.name.StartsWith ("Cube")) {
 						Rigidbody rb = hit.GetComponent<Rigidbody> ();
 						if (rb != null) {
-							rb.AddExplosionForce (power, explosionPos, radius, 0f);
+							rb.AddExplosionForce (power*3f, explosionPos, radius, 0f);
 							}
 						//Destroy (this.gameObject);
 					}
