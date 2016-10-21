@@ -399,5 +399,11 @@ namespace UnityStandardAssets.Water
             reflectionMat.m32 = 0F;
             reflectionMat.m33 = 1F;
         }
+
+		void OnCollisionEnter(Collision col){
+			if (col.collider.tag == "Player") {
+				Physics.IgnoreCollision (col.collider, this.GetComponent<Collider> ());
+			}
+		}
     }
 }

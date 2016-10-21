@@ -32,6 +32,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		[SerializeField] private GameObject missilePrefab;
 		[SerializeField] private GameObject gameController;
 		public bool isActive;
+		private bool firstTurn;
 
 		private Camera m_Camera;
 		private bool m_Jump;
@@ -55,7 +56,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		private int shotNumber = 2;
 		private float endTimer = 0;
 		private float endTime = 8;
-
+		private bool fstTurn;
 		//private MonoBehaviour gameController;
 
 		// Use this for initialization
@@ -75,11 +76,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			reload_timer = 0f;
 			gameController = GameObject.Find ("GameController");
 		}
-
-
+			
 		// Update is called once per frame
 		private void Update()
-		{
+		{	
 			if (shot_fired) {
 				reload_timer += Time.deltaTime;
 
@@ -106,7 +106,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 				if (!m_PreviouslyGrounded && m_CharacterController.isGrounded) {
 					StartCoroutine (m_JumpBob.DoBobCycle ());
-					PlayLandingSound ();
+					//PlayLandingSound ();
 					m_MoveDir.y = 0f;
 					m_Jumping = false;
 				}
@@ -163,12 +163,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 					if (m_Jump) {
 						m_MoveDir.y = m_JumpSpeed;
-						PlayJumpSound ();
+						//PlayJumpSound ();
 						m_Jump = false;
 						m_Jumping = true;
 					}
 				} else {
-					m_MoveDir += Physics.gravity * m_GravityMultiplier * Time.fixedDeltaTime;
+						m_MoveDir += Physics.gravity * m_GravityMultiplier * Time.fixedDeltaTime;
 				}
 				m_CollisionFlags = m_CharacterController.Move (m_MoveDir * Time.fixedDeltaTime);
 
@@ -207,7 +207,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 			m_NextStep = m_StepCycle + m_StepInterval;
 
-			PlayFootStepAudio();
+			//PlayFootStepAudio();
 		}
 
 
@@ -300,6 +300,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				return;
 			}
 
+			if (hit.gameObject.tag.Equals("Water")) {
+				Physics.IgnoreCollision (hit.collider, this.GetComponent<Collider> ());
+			}
+
 			if (body == null || body.isKinematic)
 			{
 				return;
@@ -320,6 +324,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			missile.GetComponent<Rigidbody> ().AddForce (m_Camera.transform.forward*shotForce*shotPower);
 			shot_fired = true;
 			shotCount += 1;
+			gameController.SendMessage ("Shot");
 		}
 
 	}

@@ -16,6 +16,7 @@ public class gameController : MonoBehaviour {
 	private FirstPersonController p2controller;
 	public static int enabledPlayer = 1;
 	private Image img;
+	public Text EndText;
 	// Use this for initialization
 	void Start() {
 		p1controller = player1.GetComponent<FirstPersonController> ();
@@ -32,6 +33,12 @@ public class gameController : MonoBehaviour {
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.Tab)) {
 			SwitchPlayer_ ();
+		}
+		if (player1.transform.position.y < -5) {
+			Dead ("Player 2");
+		}
+		if (player2.transform.position.y < -5) {
+			Dead ("Player 1");
 		}
 
 	}
@@ -92,4 +99,26 @@ public class gameController : MonoBehaviour {
 	public void switchColor(){
 		fortBuilder.SendMessage("switchColor");
 	}
+
+	public void Shot(){
+
+	}
+
+	public void Dead(string player){
+		Camera p1cam = player1.transform.GetComponentInChildren<Camera> ();
+		Camera p2cam = player2.transform.GetComponentInChildren<Camera> ();
+		Camera pan = GameObject.Find ("PanCamera").GetComponent<Camera> ();
+		pan.enabled = true;
+		p1cam.enabled = false;
+		p2cam.enabled = false;
+		EndText.text = player + " wins!";
+		StartCoroutine ("Death");
+	}
+
+	IEnumerator Death(){
+		yield return new WaitForSeconds (10f);
+		Application.LoadLevel ("Scene1");
+		yield return null;
+	}
+
 }

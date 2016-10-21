@@ -28,7 +28,7 @@ public class missile : MonoBehaviour {
 		if (!exploded) {
 			//võtan mingis raadiuses kinematicu maha
 			Vector3 explosionPos = this.gameObject.transform.position;
-			Collider[] kinematicColliders = Physics.OverlapSphere (explosionPos, radius * 2);
+			Collider[] kinematicColliders = Physics.OverlapSphere (explosionPos, radius * 1.5f);
 			foreach (Collider hit in kinematicColliders) {
 				if (hit.gameObject.name.StartsWith ("Cube")) {
 
@@ -49,7 +49,7 @@ public class missile : MonoBehaviour {
 					if (hit.gameObject.name.StartsWith ("Cube")) {
 						Rigidbody rb = hit.GetComponent<Rigidbody> ();
 						if (rb != null) {
-							rb.AddExplosionForce (power*3f, explosionPos, radius, 0f);
+							rb.AddExplosionForce (power, explosionPos, radius, 0f);
 							}
 						//Destroy (this.gameObject);
 					}
