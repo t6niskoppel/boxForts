@@ -8,9 +8,14 @@ public class missile : MonoBehaviour {
 	public float power;
 	private bool exploded = false;
 
+	public Texture[] textures;
+	public Renderer rend;
 	// Use this for initialization
 	void Start () {
 		gameController = GameObject.Find ("GameController").GetComponent<gameController> ();
+		rend = GetComponent<Renderer> ();
+		print (Random.RandomRange (0, textures.Length));
+		rend.material.mainTexture=textures[Random.RandomRange (0, textures.Length)];
 	}
 	
 	// Update is called once per frame
@@ -18,6 +23,7 @@ public class missile : MonoBehaviour {
 		if (this.transform.position.y < -30) {
 			Destroy (this.gameObject);
 			gameController.SendMessage ("switchColor");
+
 		}
 	}
 

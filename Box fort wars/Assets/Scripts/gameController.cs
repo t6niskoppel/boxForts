@@ -97,6 +97,7 @@ public class gameController : MonoBehaviour {
 	}
 
 	public void switchColor(){
+		
 		fortBuilder.SendMessage("switchColor");
 	}
 
