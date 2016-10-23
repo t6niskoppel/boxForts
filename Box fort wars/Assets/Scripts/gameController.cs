@@ -17,8 +17,20 @@ public class gameController : MonoBehaviour {
 	public static int enabledPlayer = 1;
 	private Image img;
 	public Text EndText;
+
+	private AudioSource p1as;
+	private AudioSource p2as;
+	public AudioClip gameMusic;
 	// Use this for initialization
 	void Start() {
+
+		Cursor.visible = false;
+		p1as = player1.GetComponent<AudioSource> ();
+		p2as = player2.GetComponent<AudioSource> ();
+		p1as.clip = gameMusic;
+		p2as.clip = gameMusic;
+		//p1as.Play ();
+		p2as.Play ();
 		p1controller = player1.GetComponent<FirstPersonController> ();
 		p2controller = player2.GetComponent<FirstPersonController> ();
 		img =  GameObject.Find ("Image").gameObject.GetComponent<Image>();
@@ -27,6 +39,17 @@ public class gameController : MonoBehaviour {
 		p2rb = player2.GetComponent<Rigidbody> ();
 		p1cc = player1.GetComponent<CharacterController> ();
 		p2cc = player2.GetComponent<CharacterController> ();
+		p2controller.enabled = false;
+		p2rb.isKinematic = false;
+		p2cc.enabled = false;
+		p1controller.enabled = true;
+		p1rb.isKinematic = true;
+		p1cc.enabled = true;
+		Camera p1cam = player1.transform.GetComponentInChildren<Camera> ();
+		Camera p2cam = player2.transform.GetComponentInChildren<Camera> ();
+
+		p1cam.enabled = true;
+		p2cam.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -118,7 +141,8 @@ public class gameController : MonoBehaviour {
 
 	IEnumerator Death(){
 		yield return new WaitForSeconds (10f);
-		Application.LoadLevel ("Scene1");
+		Cursor.visible = true;
+		Application.LoadLevel ("Menu");
 		yield return null;
 	}
 

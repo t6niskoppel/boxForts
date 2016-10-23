@@ -26,7 +26,7 @@ public class fortBuilder : MonoBehaviour {
 		 //backup
 
 		buildFort (0, 0, 0, fort1);
-		buildFort (-40, 0, 0, fort2);
+		buildFort (-80, 0, 0, fort2);
 		fort2.transform.Rotate (new Vector3 (0, 180, 0));
 		/*
 		//outer walls
@@ -223,7 +223,7 @@ public class fortBuilder : MonoBehaviour {
 		//back middle tower
 		buildWall (31f, 0f, 0f, 1, 8, 5, fort);
 		buildWall (27f, 0f, 5f, 5, 8, 1, fort);
-		buildWall (27f, 0f, 0f, 1, 8, 5, fort);
+		buildWall (27f, 0f, 0f, 3, 8, 5, fort);
 		plankify_z (42f, 16f, 0f, 10f, 4, fort);
 		buildWall (26f, 6.5f, 0f, 1, 1, 5, fort);
 

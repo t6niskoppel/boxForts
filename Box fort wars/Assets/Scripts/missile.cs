@@ -3,7 +3,7 @@ using System.Collections;
 
 public class missile : MonoBehaviour {
 
-	private gameController gameController;
+	private MonoBehaviour gameController;
 	public float radius;
 	public float power;
 	private bool exploded = false;
@@ -12,7 +12,10 @@ public class missile : MonoBehaviour {
 	public Renderer rend;
 	// Use this for initialization
 	void Start () {
-		gameController = GameObject.Find ("GameController").GetComponent<gameController> ();
+		GameObject temp  = GameObject.Find ("GameController");
+		if (temp != null) {
+			gameController = temp.GetComponent<MonoBehaviour> ();
+		}
 		rend = GetComponent<Renderer> ();
 		print (Random.RandomRange (0, textures.Length));
 		rend.material.mainTexture=textures[Random.RandomRange (0, textures.Length)];
@@ -20,7 +23,7 @@ public class missile : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (this.transform.position.y < -30) {
+		if (this.transform.position.y < -30&& gameController!=null){
 			Destroy (this.gameObject);
 			gameController.SendMessage ("switchColor");
 
