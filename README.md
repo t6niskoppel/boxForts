@@ -1,3 +1,4 @@
 # Box Fort Wars
-by Tõnis Koppel & Heiti Ehrpais
+Student project
+Unity game by TÃµnis Koppel & Heiti Ehrpais
 
